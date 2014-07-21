@@ -1,0 +1,14 @@
+- criar o jogo
+- aceitar jogadores limitar a 2 jogadores
+- gerenciamento de rodada
+	- jogada
+	- verificarResultado
+		- vitoria
+		- derrota
+		- empate
+
+- parte administrativa
+	- definir sessao de jogador
+- salas
+- filas de jogadores
+

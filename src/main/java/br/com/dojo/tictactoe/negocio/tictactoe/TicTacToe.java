@@ -14,7 +14,7 @@ public class TicTacToe {
 	private List<String> jogadores = new ArrayList<>();
 	private int jogadorDaVez = 0;
 	private Integer[][] tabuleiro;
-	private boolean jogoFinalizado = false;
+	private boolean temVencedor = false;
 	private String vencedor;
 
 	public TicTacToe(int tamanho) {
@@ -35,7 +35,7 @@ public class TicTacToe {
 			throw new RuntimeException("Posição já marcada!!");
 		}
 		
-		if (jogoFinalizado) {
+		if (temVencedor || jogadasDisponiveis == 0) {
 			throw new RuntimeException("Esse jogo ja acabou!! Perdeu playboy!!");
 		}
 
@@ -49,14 +49,17 @@ public class TicTacToe {
 			jogadorDaVez = 0;
 		}
 		
-		jogoFinalizado = verificarSeHouveVencedor();
-		
-		if (jogoFinalizado && vencedor != null) {
-			return new ResultadoJogada("finalizado",vencedor);			
-		} else {
-			return new ResultadoJogada("velha",null);
-			
+		temVencedor = verificarSeHouveVencedor();
+
+		if (vencedor != null) {
+			return new ResultadoJogada("finalizado",vencedor);
 		}
+		
+		if (jogadasDisponiveis == 0) {
+			return new ResultadoJogada("velha",null);
+		}
+		
+		return new ResultadoJogada("rolando",null);
 		
 	}
 

@@ -1,5 +1,8 @@
 package br.com.dojo.tictactoe.negocio.tictactoe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -345,7 +348,7 @@ public class TicTacToeTest {
 		 *  2	0 | X | 0
 		 */
 		
-		Assert.assertEquals(resposta.getStatus(),"velha");
+		Assert.assertEquals("velha", resposta.getStatus());
 		
 		
 	}
@@ -366,6 +369,34 @@ public class TicTacToeTest {
 			 */
 			
 			jogoPadrao.realizarJogada(0,1);//0
+	}
+	
+	@Test
+	public void verificaQueJogoNaoAcabouAteTerminar(){
+		List<ResultadoJogada> resultados = new ArrayList<>();
+		resultados.add(jogoPadrao.realizarJogada(0,0));//X
+		resultados.add(jogoPadrao.realizarJogada(0,1));//0
+		resultados.add(jogoPadrao.realizarJogada(0,2));//X
+		
+		resultados.add(jogoPadrao.realizarJogada(1,0));//0
+		resultados.add(jogoPadrao.realizarJogada(1,1));//X
+		resultados.add(jogoPadrao.realizarJogada(2,0));//0
+		
+		resultados.add(jogoPadrao.realizarJogada(1,2));//X
+		resultados.add(jogoPadrao.realizarJogada(2,2));//0
+		
+		for (ResultadoJogada resultadoJogada : resultados) {
+			Assert.assertEquals("rolando", resultadoJogada.getStatus());
+		}
+		
+		/*
+		 *  	0   1   2
+		 *  
+		 *  0	X | 0 | X
+		 *  1	0 | X | X
+		 *  2	0 |   | 0
+		 */
+		
 	}
 
 	private void verificarQueTodasEstaoMarcadasMenos(int[]... posicoesExcluidas) {
